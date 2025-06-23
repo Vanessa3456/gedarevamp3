@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEDA Group - Pan-African Investment & Economic Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://gedagroup.com/wp-content/uploads/2021/09/pexels-fauxels-3184325-scaled-1-1024x683.jpg');
+            background-size: cover;
+            background-position: center; */
+        /* } */
+        .hero-slideshow {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 0;
+            transition: opacity 2s ease-in-out, visibility 0s linear 1.5s;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+            transition: opacity 2s ease-in-out, visibility 0s;
+        }
+
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .section {
+            scroll-margin-top: 80px;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        .service-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card:hover .learn-more-arrow {
+            transform: translateX(5px);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #E53935;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .active-nav:after {
+            width: 100%;
+        }
+
+.market-hero {
+    /* background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 50%, #FFFFFF 100%); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+        
+        .market-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(220, 38, 127, 0.05) 0%, transparent 70%);
+        }
+                .sector-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+               .sector-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(229, 57, 53, 0.03), transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .sector-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+        .sector-card:hover {
+            transform: translateY(-10px);
+            border-color: #E53935;
+            box-shadow: 0 25px 50px rgba(229, 57, 53, 0.15);
+        } 
+                .sector-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #E53935, #EF5350);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        .sector-highlights li {
+            color: #666666;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+                .sector-highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #E53935;
+            font-weight: bold;
+        }
+        
+        .investment-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .investment-card:hover {
+            transform: translateY(-5px);
+            border-color: #E53935;
+            box-shadow: 0 15px 30px rgba(229, 57, 53, 0.15);
+        }
+        
+        .investment-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #E53935, #EF5350);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        
+    </style>
+</head>
+
+<body class="bg-white text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="https://gedagroup.com/wp-content/uploads/2021/09/gedalogo-1.png" alt="GEDA Group Logo"
+                        class="h-12">
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link active-nav text-gray-800 hover:text-red-600 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-gray-800 hover:text-red-600 font-medium">About Us</a>
+                    <a href="#services" class="nav-link text-gray-800 hover:text-red-600 font-medium">Our Sectors</a>
+                    <a href="#market" class="nav-link text-gray-800 hover:text-red-600 font-medium">Market</a>
+                    <a href="#news" class="nav-link text-gray-800 hover:text-red-600 font-medium">News</a>
+                    <a href="#contact" class="nav-link text-gray-800 hover:text-red-600 font-medium">Contact</a>
+                    <a href="#contact"
+                        class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition duration-300">Get
+                        in Touch</a>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="lg:hidden hidden" id="mobile-menu">
+                <div class="pt-2 pb-4 space-y-2">
+                    <a href="#home"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Home</a>
+                    <a href="#about"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">About
+                        Us</a>
+                    <a href="#services"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Our
+                        Sectors</a>
+                                            <a href="#market" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Market</a>
+
+                    <a href="#news"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">News</a>
+                    <a href="#contact"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Contact</a>
+                    <a href="#contact"
+                        class="block w-full text-center bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition duration-300 mt-2">Get
+                        in Touch</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-slideshow flex items-center justify-center text-white section">
+        <!-- Background slides -->
+        <div class="hero-slide active"
+            style="background-image: url('https://gedagroup.com/wp-content/uploads/2021/09/pexels-fauxels-3184325-scaled-1-1024x683.jpg');">
+        </div>
+        <div class="hero-slide"
+            style="background-image: url('https://gedagroup.com/wp-content/uploads/2021/09/pexels-quang-nguyen-vinh-2138126-scaled-1.jpg');">
+        </div>
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        </div>
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        </div>
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        </div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-6 pt-24 pb-16 hero-content">
+            <div class="flex justify-center">
+                <div class="max-w-4xl text-center">
+                    <div class="bg-red-600 text-white px-4 py-2 rounded-full inline-block mb-6">
+                        <span class="font-medium">Investing in Africa's Future</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        Driving <span class="text-red-400">Economic Growth</span> Across Africa
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-10">
+                        GEDA Group is a pan-African investment company dedicated to unlocking Africa's economic
+                        potential through strategic investments in key sectors.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#services"
+                            class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium text-center transition duration-300">Explore
+                            Our Sectors</a>
+                        <a href="#contact"
+                            class="bg-transparent hover:bg-white hover:text-gray-900 border-2 border-white text-white px-8 py-3 rounded-lg font-medium text-center transition duration-300">Contact
+                            Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <script>
+        class HeroSlideshow {
+            constructor() {
+                this.slides = document.querySelectorAll('.hero-slide');
+                this.currentSlide = 0;
+                this.slideInterval = null;
+
+                this.init();
+            }
+
+            init() {
+                this.startSlideshow();
+            }
+
+            startSlideshow() {
+                this.slideInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000); // Change slide every 5 seconds
+            }
+
+            nextSlide() {
+                this.slides[this.currentSlide].classList.remove('active');
+
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+
+                this.slides[this.currentSlide].classList.add('active');
+            }
+
+            goToSlide(slideIndex) {
+                this.slides[this.currentSlide].classList.remove('active');
+
+                this.currentSlide = slideIndex;
+
+                this.slides[this.currentSlide].classList.add('active');
+
+                clearInterval(this.slideInterval);
+                this.startSlideshow();
+            }
+
+        }
+
+        // Initialize slideshow when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new HeroSlideshow();
+        });
+
+        // Pause slideshow on hover
+        document.querySelector('.hero-slideshow').addEventListener('mouseenter', () => {
+            const slideshow = document.querySelector('.hero-slideshow');
+            if (slideshow.slideshow) {
+                clearInterval(slideshow.slideshow.slideInterval);
+            }
+        });
+
+        document.querySelector('.hero-slideshow').addEventListener('mouseleave', () => {
+            const slideshow = document.querySelector('.hero-slideshow');
+            if (slideshow.slideshow) {
+                slideshow.slideshow.startSlideshow();
+            }
+        });
+    </script>
+    <!-- About -->
+
+    <section id="about" class="py-12 bg-gray-50 section">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-start gap-4">
+                <div class="lg:w-1/2">
+                    <img src="https://gedagroup.com/wp-content/uploads/2021/12/gedagroup-image.png" alt="About GEDA"
+                        class="w-full max-w-md rounded-lg shadow-lg object-cover">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                        About <span class="text-red-600">GEDA Group</span>
+                    </h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        Global Economic Development Alliance (GEDA Group) Ltd is a pan-African investment company with
+                        interest in economic development in emerging economies, with a particular focus on developing
+                        the strategic sectors of Africa's economy.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Leveraging over 20 years of expertise, GEDA partners with innovators and entrepreneurs across
+                        Africa to unlock the continent's vast economic potential and drive sustainable development.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                        <div class="bg-white p-3 rounded-lg shadow-lg">
+                            <h3 class="text-lg font-bold mb-1">Our Mission</h3>
+                            <p class="text-gray-600 text-sm">To accelerate economic growth through strategic investments
+                                in key
+                                sectors that drive sustainable development.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-lg">
+                            <h3 class="text-lg font-bold mb-1">Our Vision</h3>
+                            <p class="text-gray-600 text-sm">A thriving, self-sufficient Africa powered by local
+                                innovation and
+                                global partnerships.</p>
+                        </div>
+                    </div>
+                    <a href="#contact"
+                        class="inline-block bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Learn
+                        More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats section -->
+    <section class="py-16 bg-red-600 text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6 stat-item" data-target="20">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 counter">0+</h3>
+                    <p class="text-red-100">Years Experience</p>
+                </div>
+                <div class="p-6 stat-item" data-target="5">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 counter">0</h3>
+                    <p class="text-red-100">Strategic Sectors</p>
+                </div>
+                <div class="p-6 stat-item" data-target="12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 counter">0+</h3>
+                    <p class="text-red-100">African Countries</p>
+                </div>
+                <div class="p-6 stat-item" data-target="50">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 counter">0+</h3>
+                    <p class="text-red-100">Successful Projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Intersection Observer to trigger animation when section comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, {
+            threshold: 0.1,// Trigger when 30% of the section is visible
+            rootMargin: '50px' // Start animation 50px before the section is visible
+
+        });
+
+        // Observe the stats section
+        const statsSection = document.querySelector('section');
+        observer.observe(statsSection);
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-item');
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const numberElement = counter.querySelector('.counter');
+                const hasPlus = numberElement.textContent.includes('+');
+
+                let current = 0;
+                const increment = target / 100; // Adjust speed by changing denominator
+                const duration = 5000; // Total animation duration in ms
+                const stepTime = duration / 100;
+
+                const timer = setInterval(() => {
+                    current += increment;
+
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+
+                    // Update the display
+                    if (hasPlus) {
+                        numberElement.textContent = Math.floor(current) + '+';
+                    } else {
+                        numberElement.textContent = Math.floor(current);
+                    }
+                }, stepTime);
+            });
+        }
+
+        // Optional: Add some entrance animations
+        const statItems = document.querySelectorAll('.stat-item');
+        statItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, index * 100); // Stagger the entrance
+        });
+    </script>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Strategic <span class="text-red-600">Sectors</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    We invest across key industries to foster sustainable development and economic growth throughout
+                    Africa.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-6">
+                <!-- ICT Card -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="ICT" class="w-full h-40 object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Information & Communication Technology</h3>
+                    <p class="text-gray-600 mb-4">
+                        We support the digital transformation of Africa through strategic investments in ICT
+                        infrastructure and innovations.
+                    </p>
+                    <a href="#market" class="text-red-600 font-medium flex items-center group">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Energy Card -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Energy" class="w-full h-40 object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Energy</h3>
+                    <p class="text-gray-600 mb-4">
+                        Investing in sustainable energy solutions to power Africa's industrialization and economic
+                        development.
+                    </p>
+                    <a href="#market" class="text-red-600 font-medium flex items-center">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Agriculture Card -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Agriculture" class="w-full h-40 object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Agriculture</h3>
+                    <p class="text-gray-600 mb-4">
+                        Supporting agricultural innovations to ensure food security and create economic opportunities in
+                        rural communities.
+                    </p>
+                    <a href="#market" class="text-red-600 font-medium flex items-center">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Education Card -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Education" class="w-full h-40 object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Education</h3>
+                    <p class="text-gray-600 mb-4">
+                        Investing in educational infrastructure and programs to develop Africa's human capital for the
+                        digital age.
+                    </p>
+                    <a href="#market" class="text-red-600 font-medium flex items-center">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Real Estate Card -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Real Estate" class="w-full h-40 object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real Estate</h3>
+                    <p class="text-gray-600 mb-4">
+                        Developing sustainable and innovative real estate projects to support Africa's urban
+                        transformation.
+                    </p>
+                    <a href="#market" class="text-red-600 font-medium flex items-center">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+                
+
+                <!-- Emerging Sectors Card -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-icon bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Emerging Sectors</h3>
+                    <p class="text-gray-600 mb-4">
+                        Continually exploring new investment opportunities in Africa's growing markets and innovative
+                        industries.
+                    </p>
+                    <a href="#market" class="text-red-600 font-medium flex items-center">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Market Environment Section -->
+    <section id="market" class="py-12 bg-gray-50 section">
+        <div class="container mx-auto px-6">
+            <!-- Hero Section -->
+            <div class="hero-section market-hero rounded-lg mb-16">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-gray-800">
+                            <span class="text-red-600">Market</span> Environment
+                        </h1>               
+                        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10">
+                            Africa's emerging economies continue to drive significant global economic growth, with the continent witnessing 5-6% annual growth over the past decade. As economic conditions improve, Africa presents unprecedented opportunities for strategic investments across key sectors.
+                        </p>                       
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Sectors Section -->
+          <div class="section-header mb-16 text-center">
+    <h2 class="text-2xl md:text-2xl font-bold mb-4 text-gray-800">
+        Strategic Investment Sectors
+    </h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">
+        GEDA Group focuses on key sectors driving Africa's economic transformation and sustainable development.
+    </p>
+</div>
+
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="sector-card fade-in">
+                    <div class="sector-icon">💻</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Information & Communications Technology</h3>
+                    <p class="text-gray-600 mb-6">
+                        With new cable projects across Africa, increased telecommunications bandwidth is improving connectivity continent-wide. The global ICT market has experienced phenomenal growth, driven by Internet expansion and digital content innovation.
+                    </p>
+                    <ul class="sector-highlights">
+                        <li>Enhanced Internet connectivity across Africa</li>
+                        <li>Digital transformation initiatives</li>
+                        <li>Telecommunications infrastructure development</li>
+                        <li>Innovation in digital platforms and services</li>
+                    </ul>
+                </div>
+                
+                <div class="sector-card fade-in">
+                    <div class="sector-icon">💰</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Financial Innovation</h3>
+                    <p class="text-gray-600 mb-6">
+                        Africa has the lowest banking penetration globally, creating massive opportunities for financial innovation. Mobile money and inclusive financial services are key to unlocking economic growth across the continent.
+                    </p>
+                    <ul class="sector-highlights">
+                        <li>Mobile money solutions expansion</li>
+                        <li>Financial inclusion initiatives</li>
+                        <li>Digital banking platforms</li>
+                        <li>Innovative payment systems</li>
+                    </ul>
+                </div>
+                
+                <div class="sector-card fade-in">
+                    <div class="sector-icon">⚡</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Energy Security</h3>
+                    <p class="text-gray-600 mb-6">
+                        Africa must meet medium-term energy requirements while innovating in clean technologies, nuclear energy, and renewables. Smart energy solutions are among our key focus areas for sustainable development.
+                    </p>
+                    <ul class="sector-highlights">
+                        <li>Renewable energy projects</li>
+                        <li>Clean coal technologies</li>
+                        <li>Smart grid infrastructure</li>
+                        <li>Energy storage solutions</li>
+                    </ul>
+                </div>
+                
+                <div class="sector-card fade-in">
+                    <div class="sector-icon">🏥</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">eHealth Innovation</h3>
+                    <p class="text-gray-600 mb-6">
+                        Healthcare innovation is crucial for Africa's prosperity. We develop solutions that improve healthcare delivery through smart health services, combining health systems with ICT in modern, cost-effective ways.
+                    </p>
+                    <ul class="sector-highlights">
+                        <li>Telemedicine platforms</li>
+                        <li>Digital health records</li>
+                        <li>Medical equipment innovation</li>
+                        <li>Healthcare accessibility solutions</li>
+                    </ul>
+                </div>
+                
+                <div class="sector-card fade-in">
+                    <div class="sector-icon">🎓</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Education Technology</h3>
+                    <p class="text-gray-600 mb-6">
+                        Education catalyzes African growth through localized curricula and skill development. We partner with stakeholders to provide smart education technologies and design localized solutions for institutions.
+                    </p>
+                    <ul class="sector-highlights">
+                        <li>Smart education platforms</li>
+                        <li>Localized learning solutions</li>
+                        <li>Digital skills training</li>
+                        <li>Educational infrastructure development</li>
+                    </ul>
+                </div>
+                
+                <div class="sector-card fade-in">
+                    <div class="sector-icon">🌾</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">AgriTech & Business</h3>
+                    <p class="text-gray-600 mb-6">
+                        Agriculture contributes over 30% of GDP in most African countries and is the continent's largest employer. We revolutionize the sector through technology integration and environmentally sustainable practices.
+                    </p>
+                    <ul class="sector-highlights">
+                        <li>Precision farming technologies</li>
+                        <li>Sustainable agricultural practices</li>
+                        <li>Supply chain optimization</li>
+                        <li>Climate-smart agriculture</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 section-header">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose <span class="text-red-600">GEDA Group</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    We bring unparalleled expertise and commitment to our partners in Africa's development.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                <div class="feature-card bg-white p-6 lg:p-8 rounded-lg shadow-lg text-center transition duration-300">
+                    <div
+                        class="icon-container bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Trusted Experience</h3>
+                    <p class="text-gray-600">
+                        With over 20 years of experience in African markets, we understand the unique challenges and
+                        opportunities across the continent.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 lg:p-8 rounded-lg shadow-lg text-center transition duration-300">
+                    <div
+                        class="icon-container bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Local Expertise</h3>
+                    <p class="text-gray-600">
+                        Our team combines international best practices with deep local knowledge to deliver results that
+                        work in African contexts.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 lg:p-8 rounded-lg shadow-lg text-center transition duration-300">
+                    <div
+                        class="icon-container bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sustainable Impact</h3>
+                    <p class="text-gray-600">
+                        We prioritize investments that create lasting economic benefits for communities while delivering
+                        financial returns.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- news Section -->
+    <section id="news" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Latest <span class="text-red-600">News</span></h2>
+
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Stay updated with our latest developments and partnerships across Africa.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-6">
+                <!-- New one -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://gedagroup.com/wp-content/uploads/2021/12/dotconnectnews.jpeg" alt="News Image"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <div class="text-sm text-gray-500 mb-2">December 17, 2021</div>
+                    <h3 class="text-xl font-bold mb-3">DotConnectAfrica Restructures Under GEDA</h3>
+                    <p class="text-gray-600 mb-4">
+                        Strategic restructuring of DotConnectAfrica Group to better serve digital transformation
+                        across the continent.
+                    </p>
+                    <a href="#" class="text-red-600 font-medium flex items-center group">
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+
+                <!-- New 2 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://gedagroup.com/wp-content/uploads/2021/12/gedagroup-image.png" alt="News Image"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <div class="text-sm text-gray-500 mb-2">December 17, 2021</div>
+                    <h3 class="text-xl font-bold mb-3">GEDA Chairwoman Provides Thought Leadership</h3>
+                    <p class="text-gray-600 mb-4">
+                        Our chairwoman shares insights on economic development in Africa at the prestigious
+                        international conference.
+                    </p>
+                    <a href="#" class="text-red-600 font-medium flex items-center group">
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- News 3 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-6 transition duration-300 card-hover">
+                    <div class="service-image mb-4 overflow-hidden rounded-lg">
+                        <img src="https://gedagroup.com/wp-content/uploads/2022/01/newimage-dca.png" alt="News Image"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <div class="text-sm text-gray-500 mb-2">January 28, 2022</div>
+                    <h3 class="text-xl font-bold mb-3">DCA Group & Affiliates Partner with DHL and Bolt</h3>
+                    <p class="text-gray-600 mb-4">
+                        Exciting new partnerships formed to enhance digital infrastructure and logistics solutions
+                        across Africa
+                    </p>
+                    <a href="#" class="text-red-600 font-medium flex items-center group">
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 learn-more-arrow"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+    </section>
+
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our <span class="text-red-600">Partners</span> Say
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Hear from organizations and individuals who have worked with GEDA Group.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold">DCA Technologies</h3>
+                            <p class="text-gray-600">Technology Partner</p>
+                        </div>
+                        <div class="text-yellow-400 flex space-x-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "GEDA's strategic vision and deep understanding of African markets have been invaluable in our
+                        expansion across the continent. Their partnership approach goes beyond just investment to
+                        include mentorship and local knowledge sharing."
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold">East African Agribusiness</h3>
+                            <p class="text-gray-600">Agriculture Partner</p>
+                        </div>
+                        <div class="text-yellow-400 flex space-x-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "The agricultural transformation program supported by GEDA has helped us modernize our
+                        operations while maintaining sustainability. Their experts provided not just capital but also
+                        technical know-how that has increased our yields by 40%."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-red-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Partner With Us?</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                Join us in building Africa's economic future through strategic investments and partnerships.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#contact"
+                    class="bg-white hover:bg-gray-100 text-red-600 px-8 py-3 rounded-lg font-medium transition duration-300 inline-block">Contact
+                    Our Team</a>
+                <a href="#services"
+                    class="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 rounded-lg font-medium transition duration-300 inline-block">Explore
+                    Investments</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white section">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-start">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Get In <span class="text-red-600">Touch</span>
+                    </h2>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        Have questions about our investment opportunities or want to explore partnership possibilities?
+                        Our team is ready to assist you.
+                    </p>
+
+                    <div class="space-y-4 mb-4">
+                        <div class="flex items-start">
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Email</h3>
+                                <p class="text-gray-600">info@gedagroup.com</p>
+                                <p class="text-gray-600">investments@gedagroup.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Offices</h3>
+                                <p class="text-gray-600 mb-2">
+                                    <strong>Kenya:</strong> CIC Plaza, Ground floor, Mara Road Upper Hill, Box
+                                    39466-00623 Nairobi, Kenya.
+                                </p>
+                                <p class="text-gray-600">
+                                    <strong>Mauritius:</strong> 1st Floor, River Court, 6 St. Denis Street, Port Louis,
+                                    11328.
+                                </p>
+                                <p class="text-gray-600">
+                                    <strong>Ethopia:</strong> Bekele Eshete TowersAddis Abba, Ethiopia,P.O. Box 5992 Old
+                                    Airport,
+                                </p>
+                                <p class="text-gray-600">
+                                    <strong>Califormia:</strong> Alpine Park, 1700 Botehlo Drive. P.O. Box 303
+                                    California,USA, 94596
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex space-x-4">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <form class="bg-white p-8 rounded-lg shadow-lg">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                placeholder="Enter your name">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                placeholder="Enter your email">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                placeholder="What can we help you with?">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                placeholder="Type your message here..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Send
+                            Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://gedagroup.com/wp-content/uploads/2021/09/gedalogo-1.png" alt="GEDA Group Logo"
+                        class="h-12 mb-4">
+                    <p class="text-gray-400">
+                        GEDA Group invests across key industries including ICT, energy, agriculture, education, and real
+                        estate to foster sustainable development in Africa.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">About Us</a>
+                        </li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Our
+                                Sectors</a></li>
+                        <li><a href="#news" class="text-gray-400 hover:text-white transition duration-300">News</a></li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Sectors</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Information
+                                Technology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Energy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Agriculture</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Education</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Real Estate</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1 mr-2 text-red-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <div>
+                                <p>Nairobi, Kenya</p>
+                                <p>Port Louis, Mauritius</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            <!-- +254 20 123 4567 -->
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            info@gedagroup.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">
+                    © 2023 Global Economic Development Alliance (GEDA Group). All rights reserved.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.add('bg-white/95');
+                navbar.classList.add('backdrop-blur-sm');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.remove('bg-white/95');
+                navbar.classList.remove('backdrop-blur-sm');
+            }
+        });
+
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active-nav');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
